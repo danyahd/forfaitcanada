@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ForfaitCanada — Comparez les meilleurs forfaits télécom au Québec</title>
+  <meta name="description" content="Comparez Internet, cellulaire, TV et téléphone. Recevez 3 soumissions gratuites de fournisseurs au Québec en 2 minutes. Compare the best telecom plans in Quebec for free." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #0B1F3A;
+      --navy2:   #132d54;
+      --blue:    #1A6FD4;
+      --blue2:   #2484F0;
+      --sky:     #E8F2FF;
+      --accent:  #FF5F2E;
+      --accent2: #FF7A4D;
+      --green:   #00C48C;
+      --white:   #FFFFFF;
+      --gray50:  #F7F9FC;
+      --gray100: #EFF2F7;
+      --gray300: #C5CDD8;
+      --gray500: #6B7A8D;
+      --gray700: #3D4C5E;
+      --text:    #0E1C2F;
+      --font-display: 'Syne', sans-serif;
+      --font-body:    'DM Sans', sans-serif;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --shadow: 0 4px 24px rgba(11,31,58,0.10);
+      --shadow-lg: 0 12px 48px rgba(11,31,58,0.16);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      height: 68px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(197,205,216,0.4);
+      animation: slideDown .5s ease both;
+    }
+    @keyframes slideDown { from { transform:translateY(-100%); opacity:0; } to { transform:translateY(0); opacity:1; } }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 22px; font-weight: 800;
+      color: var(--navy);
+      text-decoration: none;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-logo .dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; display: inline-block; }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 14px; font-weight: 500; color: var(--gray700);
+      text-decoration: none; transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--blue); }
+
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+
+    .lang-toggle {
+      font-size: 13px; font-weight: 600; color: var(--gray500);
+      background: var(--gray100); border: none; border-radius: 8px;
+      padding: 6px 14px; cursor: pointer; transition: all .2s;
+    }
+    .lang-toggle:hover { background: var(--sky); color: var(--blue); }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: var(--font-body); font-weight: 600; font-size: 15px;
+      border: none; border-radius: var(--radius-sm); cursor: pointer;
+      text-decoration: none; transition: all .2s;
+    }
+    .btn-primary {
+      background: var(--accent); color: var(--white);
+      padding: 10px 24px;
+      box-shadow: 0 4px 16px rgba(255,95,46,0.3);
+    }
+    .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(255,95,46,0.4); }
+    .btn-lg { padding: 16px 36px; font-size: 17px; border-radius: var(--radius); }
+    .btn-outline {
+      background: transparent; color: var(--navy);
+      border: 2px solid var(--gray300); padding: 10px 24px;
+    }
+    .btn-outline:hover { border-color: var(--blue); color: var(--blue); background: var(--sky); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: var(--navy);
+      display: grid; grid-template-columns: 1fr 1fr; align-items: center;
+      padding: 100px 5% 80px;
+      gap: 60px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -200px; right: -200px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(26,111,212,0.3) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -100px; left: 20%;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(255,95,46,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 100px; padding: 6px 16px 6px 8px;
+      font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.8);
+      margin-bottom: 24px;
+      animation: fadeUp .6s .1s ease both;
+    }
+    .hero-badge .pip {
+      background: var(--green); border-radius: 50%;
+      width: 8px; height: 8px;
+      box-shadow: 0 0 0 3px rgba(0,196,140,0.3);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{box-shadow:0 0 0 3px rgba(0,196,140,0.3)} 50%{box-shadow:0 0 0 6px rgba(0,196,140,0.1)} }
+
+    .hero-content { position: relative; z-index: 2; }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(38px, 5vw, 62px);
+      font-weight: 800; line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 20px;
+      animation: fadeUp .6s .2s ease both;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, #FF5F2E, #FF9A00);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 18px; font-weight: 300; line-height: 1.6;
+      color: rgba(255,255,255,0.7);
+      max-width: 480px; margin-bottom: 36px;
+      animation: fadeUp .6s .3s ease both;
+    }
+
+    .hero-ctas {
+      display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+      animation: fadeUp .6s .4s ease both;
+    }
+
+    .hero-stats {
+      display: flex; gap: 32px; margin-top: 48px;
+      animation: fadeUp .6s .5s ease both;
+    }
+    .stat { display: flex; flex-direction: column; gap: 2px; }
+    .stat-num {
+      font-family: var(--font-display); font-size: 28px; font-weight: 800;
+      color: var(--white);
+    }
+    .stat-label { font-size: 13px; color: rgba(255,255,255,0.5); }
+
+    @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+
+    /* ── HERO FORM CARD ── */
+    .hero-form-wrap {
+      position: relative; z-index: 2;
+      animation: fadeUp .7s .3s ease both;
+    }
+
+    .form-card {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 36px 32px;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid rgba(197,205,216,0.3);
+    }
+
+    .form-card-header {
+      margin-bottom: 24px;
+    }
+    .form-card-header h3 {
+      font-family: var(--font-display);
+      font-size: 20px; font-weight: 700; color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .form-card-header p { font-size: 14px; color: var(--gray500); }
+
+    .service-tabs {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 8px; margin-bottom: 20px;
+    }
+    .service-tab {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      padding: 14px 8px;
+      border: 2px solid var(--gray100);
+      border-radius: var(--radius-sm);
+      background: var(--gray50); cursor: pointer;
+      transition: all .2s; font-family: var(--font-body);
+    }
+    .service-tab:hover { border-color: var(--blue); background: var(--sky); }
+    .service-tab.active {
+      border-color: var(--blue); background: var(--sky);
+    }
+    .service-tab .icon { font-size: 22px; }
+    .service-tab .label { font-size: 11px; font-weight: 600; color: var(--gray700); text-align: center; }
+    .service-tab.active .label { color: var(--blue); }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+    .form-group label { font-size: 13px; font-weight: 600; color: var(--gray700); }
+    .form-group input, .form-group select {
+      height: 44px; padding: 0 14px;
+      border: 1.5px solid var(--gray100); border-radius: var(--radius-sm);
+      font-family: var(--font-body); font-size: 14px; color: var(--text);
+      background: var(--white); outline: none; transition: border-color .2s;
+    }
+    .form-group input:focus, .form-group select:focus { border-color: var(--blue); }
+    .form-group input::placeholder { color: var(--gray300); }
+
+    .form-submit { width: 100%; margin-top: 4px; padding: 15px; font-size: 16px; border-radius: var(--radius-sm); }
+
+    .form-trust {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      margin-top: 12px; font-size: 12px; color: var(--gray500);
+    }
+    .form-trust svg { color: var(--green); }
+
+    /* ── SERVICES STRIP ── */
+    .services-strip {
+      background: var(--gray50);
+      border-bottom: 1px solid var(--gray100);
+      padding: 20px 5%;
+      display: flex; align-items: center; justify-content: center;
+      gap: 40px; flex-wrap: wrap;
+    }
+    .strip-item {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 14px; font-weight: 500; color: var(--gray700);
+    }
+    .strip-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: var(--white); box-shadow: var(--shadow);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .section { padding: 96px 5%; }
+    .section-label {
+      font-size: 12px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--blue);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 3.5vw, 44px); font-weight: 800;
+      color: var(--navy); line-height: 1.15; margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 17px; color: var(--gray500); line-height: 1.6;
+      max-width: 560px; margin-bottom: 56px;
+    }
+
+    .how-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+    }
+    .how-card {
+      background: var(--white); border: 1.5px solid var(--gray100);
+      border-radius: 20px; padding: 32px 28px;
+      position: relative; overflow: hidden;
+      transition: all .3s;
+    }
+    .how-card:hover {
+      border-color: var(--blue); transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+    .how-num {
+      font-family: var(--font-display); font-size: 80px; font-weight: 800;
+      color: var(--gray100); line-height: 1;
+      position: absolute; top: 16px; right: 24px;
+    }
+    .how-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      background: var(--sky); display: flex; align-items: center;
+      justify-content: center; font-size: 26px; margin-bottom: 20px;
+    }
+    .how-card h4 {
+      font-family: var(--font-display); font-size: 18px; font-weight: 700;
+      color: var(--navy); margin-bottom: 10px;
+    }
+    .how-card p { font-size: 14px; color: var(--gray500); line-height: 1.6; }
+
+    /* ── WHY US ── */
+    .why-section {
+      background: var(--navy);
+      padding: 96px 5%;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .why-left .section-title { color: var(--white); }
+    .why-left .section-sub { color: rgba(255,255,255,0.6); }
+
+    .why-list { display: flex; flex-direction: column; gap: 20px; }
+    .why-item {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 20px 24px;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px; transition: all .2s;
+    }
+    .why-item:hover { background: rgba(255,255,255,0.08); }
+    .why-icon {
+      width: 44px; height: 44px; flex-shrink: 0;
+      border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+    }
+    .why-icon.blue  { background: rgba(26,111,212,0.25); }
+    .why-icon.orange{ background: rgba(255,95,46,0.25); }
+    .why-icon.green { background: rgba(0,196,140,0.25); }
+    .why-icon.purple{ background: rgba(140,80,240,0.25); }
+    .why-item h5 {
+      font-family: var(--font-display); font-size: 16px; font-weight: 700;
+      color: var(--white); margin-bottom: 4px;
+    }
+    .why-item p { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.5; }
+
+    /* ── PROVIDERS ── */
+    .providers-section { padding: 96px 5%; background: var(--gray50); }
+    .providers-grid {
+      display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px;
+      margin-top: 48px;
+    }
+    .provider-card {
+      background: var(--white); border: 1.5px solid var(--gray100);
+      border-radius: var(--radius); padding: 20px 16px;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      transition: all .2s; cursor: default;
+    }
+    .provider-card:hover { border-color: var(--blue); box-shadow: var(--shadow); transform: translateY(-2px); }
+    .provider-logo {
+      width: 48px; height: 48px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 800; letter-spacing: -.5px;
+      font-family: var(--font-display);
+    }
+    .provider-name { font-size: 12px; font-weight: 600; color: var(--gray700); text-align: center; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-section { padding: 96px 5%; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+    .testi-card {
+      background: var(--white); border: 1.5px solid var(--gray100);
+      border-radius: 20px; padding: 28px;
+      transition: all .3s;
+    }
+    .testi-card:hover { border-color: var(--blue); box-shadow: var(--shadow); }
+    .testi-stars { color: #FFAD0D; font-size: 16px; margin-bottom: 14px; }
+    .testi-text { font-size: 15px; line-height: 1.65; color: var(--gray700); margin-bottom: 20px; font-style: italic; }
+    .testi-author { display: flex; align-items: center; gap: 12px; }
+    .testi-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 16px; font-family: var(--font-display);
+    }
+    .testi-name { font-size: 14px; font-weight: 600; color: var(--navy); }
+    .testi-loc { font-size: 12px; color: var(--gray500); }
+
+    .savings-badge {
+      display: inline-block; background: rgba(0,196,140,0.1); color: var(--green);
+      border: 1px solid rgba(0,196,140,0.3); border-radius: 100px;
+      font-size: 13px; font-weight: 700; padding: 4px 12px; margin-bottom: 14px;
+    }
+
+    /* ── CTA BAND ── */
+    .cta-band {
+      background: linear-gradient(135deg, var(--blue) 0%, var(--navy) 100%);
+      padding: 72px 5%;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .cta-band::before {
+      content: '';
+      position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(255,95,46,0.2) 0%, transparent 70%);
+    }
+    .cta-band h2 {
+      font-family: var(--font-display); font-size: clamp(28px,4vw,48px);
+      font-weight: 800; color: var(--white); margin-bottom: 16px;
+      position: relative;
+    }
+    .cta-band p {
+      font-size: 17px; color: rgba(255,255,255,0.7);
+      max-width: 520px; margin: 0 auto 36px; line-height: 1.6;
+      position: relative;
+    }
+    .cta-band .btn-primary { font-size: 18px; padding: 18px 44px; position: relative; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      padding: 56px 5% 32px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand .nav-logo { font-size: 20px; margin-bottom: 12px; }
+    .footer-brand p { font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.6; max-width: 280px; }
+
+    .footer-col h6 {
+      font-family: var(--font-display); font-size: 13px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+      color: rgba(255,255,255,0.4); margin-bottom: 16px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul a { font-size: 14px; color: rgba(255,255,255,0.6); text-decoration: none; transition: color .2s; }
+    .footer-col ul a:hover { color: var(--white); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.35); }
+
+    /* ── STICKY BOTTOM BAR (mobile) ── */
+    .sticky-cta {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 99;
+      background: var(--white); border-top: 1px solid var(--gray100);
+      padding: 14px 20px;
+      box-shadow: 0 -8px 24px rgba(0,0,0,0.1);
+    }
+    .sticky-cta .btn-primary { width: 100%; justify-content: center; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; padding: 100px 5% 60px; gap: 40px; }
+      .how-grid { grid-template-columns: 1fr; }
+      .why-section { grid-template-columns: 1fr; }
+      .providers-grid { grid-template-columns: repeat(3, 1fr); }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+      .sticky-cta { display: block; }
+    }
+    @media (max-width: 600px) {
+      .hero-stats { gap: 20px; flex-wrap: wrap; }
+      .providers-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr; }
+      .services-strip { gap: 20px; }
+    }
+
+    /* ── SCROLL ANIMATIONS ── */
+    .reveal {
+      opacity: 0; transform: translateY(32px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+
+    /* ── SUCCESS STATE ── */
+    .success-msg {
+      display: none; text-align: center; padding: 20px;
+    }
+    .success-msg .check {
+      width: 56px; height: 56px; background: var(--green);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 28px; margin: 0 auto 16px;
+    }
+    .success-msg h4 { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .success-msg p { font-size: 14px; color: var(--gray500); }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Forfait<span>Canada</span></a>
+    <ul class="nav-links">
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#providers">Providers</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="lang-toggle" id="langBtn" onclick="toggleLang()">EN</button>
+      <a href="#form" class="btn btn-primary">Get Quotes</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="pip"></span>
+        <span data-fr="Service 100% gratuit — sans engagement" data-en="100% free service — no commitment">Service 100% gratuit — sans engagement</span>
+      </div>
+      <h1 data-fr="Arrêtez de payer<br>trop cher pour<br>votre <em>télécom</em>." data-en="Stop overpaying<br>for your<br><em>telecom</em> plan.">Arrêtez de payer<br>trop cher pour<br>votre <em>télécom</em>.</h1>
+      <p class="hero-sub" data-fr="Comparez Internet, cellulaire, TV et téléphone en 2 minutes. Recevez 3 soumissions personnalisées de fournisseurs au Québec — gratuitement." data-en="Compare Internet, mobile, TV, and home phone in 2 minutes. Get 3 personalized quotes from Quebec providers — for free.">Comparez Internet, cellulaire, TV et téléphone en 2 minutes. Recevez 3 soumissions personnalisées de fournisseurs au Québec — gratuitement.</p>
+      <div class="hero-ctas">
+        <a href="#form" class="btn btn-primary btn-lg" data-fr="Comparer maintenant" data-en="Compare Now">Comparer maintenant</a>
+        <a href="#how" class="btn btn-outline btn-lg" style="color:rgba(255,255,255,0.8);border-color:rgba(255,255,255,0.2);" data-fr="Comment ça fonctionne?" data-en="How does it work?">Comment ça fonctionne?</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">10K+</span>
+          <span class="stat-label" data-fr="Demandes/mois" data-en="Requests/month">Demandes/mois</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">20+</span>
+          <span class="stat-label" data-fr="Fournisseurs partenaires" data-en="Partner providers">Fournisseurs partenaires</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">$312</span>
+          <span class="stat-label" data-fr="Économies moy./an" data-en="Avg. savings/year">Économies moy./an</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- HERO FORM -->
+    <div class="hero-form-wrap" id="form">
+      <div class="form-card">
+        <div class="form-card-header">
+          <h3 data-fr="Obtenez vos soumissions gratuites" data-en="Get Your Free Quotes">Obtenez vos soumissions gratuites</h3>
+          <p data-fr="Réponse en moins de 24h • Sans engagement" data-en="Reply within 24h • No commitment">Réponse en moins de 24h • Sans engagement</p>
+        </div>
+
+        <div class="service-tabs" id="serviceTabs">
+          <button class="service-tab active" data-service="internet" onclick="setTab(this)">
+            <span class="icon">📶</span>
+            <span class="label">Internet</span>
+          </button>
+          <button class="service-tab" data-service="mobile" onclick="setTab(this)">
+            <span class="icon">📱</span>
+            <span class="label" data-fr="Cellulaire" data-en="Mobile">Cellulaire</span>
+          </button>
+          <button class="service-tab" data-service="tv" onclick="setTab(this)">
+            <span class="icon">📺</span>
+            <span class="label">TV</span>
+          </button>
+          <button class="service-tab" data-service="home" onclick="setTab(this)">
+            <span class="icon">📞</span>
+            <span class="label" data-fr="Téléphonie" data-en="Landline">Téléphonie</span>
+          </button>
+          <button class="service-tab" data-service="bundle" onclick="setTab(this)">
+            <span class="icon">⚡</span>
+            <span class="label">Combo</span>
+          </button>
+          <button class="service-tab" data-service="business" onclick="setTab(this)">
+            <span class="icon">🏢</span>
+            <span class="label" data-fr="Entreprise" data-en="Business">Entreprise</span>
+          </button>
+        </div>
+
+        <form id="leadForm" onsubmit="submitForm(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label data-fr="Prénom" data-en="First Name">Prénom</label>
+              <input type="text" placeholder="Marie" required />
+            </div>
+            <div class="form-group">
+              <label data-fr="Nom" data-en="Last Name">Nom</label>
+              <input type="text" placeholder="Tremblay" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label data-fr="Courriel" data-en="Email">Courriel</label>
+            <input type="email" placeholder="marie@exemple.com" required />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label data-fr="Téléphone" data-en="Phone">Téléphone</label>
+              <input type="tel" placeholder="514-000-0000" required />
+            </div>
+            <div class="form-group">
+              <label data-fr="Code postal" data-en="Postal Code">Code postal</label>
+              <input type="text" placeholder="H1A 1A1" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label data-fr="Fournisseur actuel" data-en="Current Provider">Fournisseur actuel</label>
+            <select>
+              <option value="" data-fr="Sélectionner..." data-en="Select...">Sélectionner...</option>
+              <option>Vidéotron</option>
+              <option>Bell</option>
+              <option>Rogers</option>
+              <option>Telus</option>
+              <option>Fizz</option>
+              <option>Oxio</option>
+              <option>Fido</option>
+              <option>Koodo</option>
+              <option>Virgin Mobile</option>
+              <option>Télébec</option>
+              <option>Distributel</option>
+              <option data-fr="Autre" data-en="Other">Autre</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary form-submit" data-fr="Recevoir mes 3 soumissions →" data-en="Get My 3 Quotes →">Recevoir mes 3 soumissions →</button>
+        </form>
+
+        <div class="success-msg" id="successMsg">
+          <div class="check">✓</div>
+          <h4 data-fr="Demande envoyée !" data-en="Request Sent!">Demande envoyée !</h4>
+          <p data-fr="Vous recevrez vos soumissions dans les prochaines 24h. Merci !" data-en="You'll receive your quotes within 24 hours. Thank you!">Vous recevrez vos soumissions dans les prochaines 24h. Merci !</p>
+        </div>
+
+        <div class="form-trust">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+          <span data-fr="SSL sécurisé • Aucune vente à pression • 100% gratuit" data-en="SSL secured • No pressure sales • 100% free">SSL sécurisé • Aucune vente à pression • 100% gratuit</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES STRIP -->
+  <div class="services-strip">
+    <div class="strip-item"><div class="strip-icon">📶</div><span data-fr="Internet haute vitesse" data-en="High-speed Internet">Internet haute vitesse</span></div>
+    <div class="strip-item"><div class="strip-icon">📱</div><span data-fr="Cellulaire" data-en="Mobile">Cellulaire</span></div>
+    <div class="strip-item"><div class="strip-icon">📺</div><span data-fr="Télévision" data-en="Television">Télévision</span></div>
+    <div class="strip-item"><div class="strip-icon">📞</div><span data-fr="Téléphonie résidentielle" data-en="Home Phone">Téléphonie résidentielle</span></div>
+    <div class="strip-item"><div class="strip-icon">🏢</div><span data-fr="Télécom PME" data-en="Business Telecom">Télécom PME</span></div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section class="section" id="how">
+    <div style="max-width:1200px;margin:0 auto;">
+      <p class="section-label reveal" data-fr="COMMENT ÇA FONCTIONNE" data-en="HOW IT WORKS">COMMENT ÇA FONCTIONNE</p>
+      <h2 class="section-title reveal reveal-delay-1" data-fr="Simple, rapide,<br>et 100% gratuit." data-en="Simple, fast,<br>and 100% free.">Simple, rapide,<br>et 100% gratuit.</h2>
+      <p class="section-sub reveal reveal-delay-2" data-fr="En 3 étapes, trouvez le meilleur forfait télécom pour vos besoins — sans frais, sans obligation." data-en="In 3 steps, find the best telecom plan for your needs — no fees, no obligation.">En 3 étapes, trouvez le meilleur forfait télécom pour vos besoins — sans frais, sans obligation.</p>
+
+      <div class="how-grid">
+        <div class="how-card reveal">
+          <span class="how-num">01</span>
+          <div class="how-icon">📝</div>
+          <h4 data-fr="Remplissez le formulaire" data-en="Fill Out the Form">Remplissez le formulaire</h4>
+          <p data-fr="Dites-nous ce que vous payez aujourd'hui et le service recherché. Ça prend moins de 2 minutes." data-en="Tell us what you're paying today and what service you need. Takes less than 2 minutes.">Dites-nous ce que vous payez aujourd'hui et le service recherché. Ça prend moins de 2 minutes.</p>
+        </div>
+        <div class="how-card reveal reveal-delay-1">
+          <span class="how-num">02</span>
+          <div class="how-icon">📊</div>
+          <h4 data-fr="Recevez 3 soumissions" data-en="Receive 3 Quotes">Recevez 3 soumissions</h4>
+          <p data-fr="Des fournisseurs fiables de votre région vous contactent avec leurs meilleures offres personnalisées." data-en="Trusted providers in your area contact you with their best personalized offers.">Des fournisseurs fiables de votre région vous contactent avec leurs meilleures offres personnalisées.</p>
+        </div>
+        <div class="how-card reveal reveal-delay-2">
+          <span class="how-num">03</span>
+          <div class="how-icon">🎯</div>
+          <h4 data-fr="Choisissez la meilleure" data-en="Choose the Best">Choisissez la meilleure</h4>
+          <p data-fr="Comparez et choisissez l'offre qui vous convient. Aucune pression. Aucune obligation." data-en="Compare and choose the offer that suits you. No pressure. No obligation.">Comparez et choisissez l'offre qui vous convient. Aucune pression. Aucune obligation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="why-section" id="services">
+    <div class="why-left">
+      <p class="section-label reveal" style="color:rgba(255,255,255,0.4);" data-fr="POURQUOI FORFAITCANADA" data-en="WHY FORFAITCANADA">POURQUOI FORFAITCANADA</p>
+      <h2 class="section-title reveal reveal-delay-1" data-fr="Votre allié pour<br>payer moins cher." data-en="Your ally for<br>paying less.">Votre allié pour<br>payer moins cher.</h2>
+      <p class="section-sub reveal reveal-delay-2" data-fr="On travaille pour vous, pas pour les fournisseurs. Notre seul objectif : vous faire économiser." data-en="We work for you, not for the providers. Our only goal: saving you money.">On travaille pour vous, pas pour les fournisseurs. Notre seul objectif : vous faire économiser.</p>
+      <a href="#form" class="btn btn-primary btn-lg reveal reveal-delay-3" data-fr="Commencer maintenant" data-en="Start Now">Commencer maintenant</a>
+    </div>
+    <div class="why-list">
+      <div class="why-item reveal">
+        <div class="why-icon blue">💰</div>
+        <div>
+          <h5 data-fr="Économies réelles, garanties" data-en="Real, Guaranteed Savings">Économies réelles, garanties</h5>
+          <p data-fr="Nos utilisateurs économisent en moyenne 312 $ par an sur leurs forfaits télécom." data-en="Our users save an average of $312 per year on their telecom plans.">Nos utilisateurs économisent en moyenne 312 $ par an sur leurs forfaits télécom.</p>
+        </div>
+      </div>
+      <div class="why-item reveal reveal-delay-1">
+        <div class="why-icon orange">🔒</div>
+        <div>
+          <h5 data-fr="Aucune pression, jamais" data-en="Zero Pressure, Ever">Aucune pression, jamais</h5>
+          <p data-fr="On présente les offres. Vous décidez. Pas de vendeurs agressifs, pas d'obligation." data-en="We present the offers. You decide. No aggressive salespeople, no obligation.">On présente les offres. Vous décidez. Pas de vendeurs agressifs, pas d'obligation.</p>
+        </div>
+      </div>
+      <div class="why-item reveal reveal-delay-2">
+        <div class="why-icon green">⚡</div>
+        <div>
+          <h5 data-fr="20+ fournisseurs vérifiés" data-en="20+ Verified Providers">20+ fournisseurs vérifiés</h5>
+          <p data-fr="Vidéotron, Bell, Fizz, Oxio et bien d'autres — incluant les petits fournisseurs qui offrent les meilleures valeurs." data-en="Vidéotron, Bell, Fizz, Oxio and more — including smaller providers who offer the best value.">Vidéotron, Bell, Fizz, Oxio et bien d'autres — incluant les petits fournisseurs qui offrent les meilleures valeurs.</p>
+        </div>
+      </div>
+      <div class="why-item reveal reveal-delay-3">
+        <div class="why-icon purple">🌐</div>
+        <div>
+          <h5 data-fr="Bilingue FR/EN" data-en="Bilingual FR/EN">Bilingue FR/EN</h5>
+          <p data-fr="Service disponible en français et en anglais, partout au Québec." data-en="Service available in French and English, across Quebec.">Service disponible en français et en anglais, partout au Québec.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROVIDERS -->
+  <section class="providers-section" id="providers">
+    <div style="max-width:1200px;margin:0 auto;">
+      <p class="section-label reveal" data-fr="NOS PARTENAIRES" data-en="OUR PARTNERS">NOS PARTENAIRES</p>
+      <h2 class="section-title reveal reveal-delay-1" data-fr="20+ fournisseurs.<br>Un seul formulaire." data-en="20+ providers.<br>One single form.">20+ fournisseurs.<br>Un seul formulaire.</h2>
+      <div class="providers-grid">
+        <div class="provider-card reveal"><div class="provider-logo" style="background:#E8F5FF;color:#004B8D;">VID</div><span class="provider-name">Vidéotron</span></div>
+        <div class="provider-card reveal reveal-delay-1"><div class="provider-logo" style="background:#FFF0F0;color:#BE0000;">BELL</div><span class="provider-name">Bell</span></div>
+        <div class="provider-card reveal reveal-delay-2"><div class="provider-logo" style="background:#FFF5E8;color:#E8491F;">RGS</div><span class="provider-name">Rogers</span></div>
+        <div class="provider-card reveal reveal-delay-3"><div class="provider-logo" style="background:#E8F5FF;color:#4B286D;">TLS</div><span class="provider-name">Telus</span></div>
+        <div class="provider-card reveal"><div class="provider-logo" style="background:#F0FFF8;color:#00875A;">FIZZ</div><span class="provider-name">Fizz</span></div>
+        <div class="provider-card reveal reveal-delay-1"><div class="provider-logo" style="background:#FFF0F8;color:#C0006A;">OXIO</div><span class="provider-name">Oxio</span></div>
+        <div class="provider-card reveal reveal-delay-2"><div class="provider-logo" style="background:#FFF8E8;color:#D4800A;">FIDO</div><span class="provider-name">Fido</span></div>
+        <div class="provider-card reveal reveal-delay-3"><div class="provider-logo" style="background:#F0F8FF;color:#D52B1E;">KDO</div><span class="provider-name">Koodo</span></div>
+        <div class="provider-card reveal"><div class="provider-logo" style="background:#FFF0F0;color:#CC0000;">VRG</div><span class="provider-name">Virgin Mobile</span></div>
+        <div class="provider-card reveal reveal-delay-1"><div class="provider-logo" style="background:#EEF4FF;color:#1A3F7A;">TBC</div><span class="provider-name">Télébec</span></div>
+        <div class="provider-card reveal reveal-delay-2"><div class="provider-logo" style="background:#F5F5F5;color:#333333;">DST</div><span class="provider-name">Distributel</span></div>
+        <div class="provider-card reveal reveal-delay-3" style="border-style:dashed;">
+          <div class="provider-logo" style="background:var(--sky);color:var(--blue);font-size:22px;">+</div>
+          <span class="provider-name" data-fr="Et plus encore" data-en="And more">Et plus encore</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials-section" id="testimonials">
+    <div style="max-width:1200px;margin:0 auto;">
+      <p class="section-label reveal" data-fr="CE QUE DISENT NOS CLIENTS" data-en="WHAT OUR CLIENTS SAY">CE QUE DISENT NOS CLIENTS</p>
+      <h2 class="section-title reveal reveal-delay-1" data-fr="Des économies réelles.<br>Des clients satisfaits." data-en="Real savings.<br>Happy customers.">Des économies réelles.<br>Des clients satisfaits.</h2>
+      <div class="testimonials-grid">
+        <div class="testi-card reveal">
+          <div class="savings-badge">💰 -$910/an</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text" data-fr="\"Service excellent, rapide et très courtois. ForfaitCanada m'a permis d'économiser 910 $ par année en comparant quatre services de télécommunications. Je recommande à tous !\"" data-en="\"Excellent, fast and very courteous service. ForfaitCanada saved me $910 a year by comparing four telecom services. I recommend it to everyone!\"">
+            "Service excellent, rapide et très courtois. ForfaitCanada m'a permis d'économiser 910 $ par année en comparant quatre services de télécommunications. Je recommande à tous !"
+          </p>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:#DBEAFE;color:#1D4ED8;">MG</div>
+            <div><div class="testi-name">Michel G.</div><div class="testi-loc">Montréal, QC</div></div>
+          </div>
+        </div>
+        <div class="testi-card reveal reveal-delay-1">
+          <div class="savings-badge">💰 -$420/an</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text" data-fr="\"J'avais Bell depuis 12 ans sans jamais comparer. En 5 minutes, j'ai trouvé une offre 35 $ moins chère par mois avec la même qualité. Incroyable !\"" data-en="\"I had Bell for 12 years without ever comparing. In 5 minutes, I found an offer $35 cheaper per month with the same quality. Incredible!\"">
+            "J'avais Bell depuis 12 ans sans jamais comparer. En 5 minutes, j'ai trouvé une offre 35 $ moins chère par mois avec la même qualité. Incroyable !"
+          </p>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:#D1FAE5;color:#065F46;">SL</div>
+            <div><div class="testi-name">Sophie L.</div><div class="testi-loc">Québec, QC</div></div>
+          </div>
+        </div>
+        <div class="testi-card reveal reveal-delay-2">
+          <div class="savings-badge">💰 -$280/an</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text" data-fr="\"Parfait pour notre PME. On a comparé nos 3 lignes d'affaires et réduit la facture de 280 $ par an. Processus simple, sans stress.\"" data-en="\"Perfect for our SMB. We compared our 3 business lines and reduced the bill by $280 per year. Simple, stress-free process.\"">
+            "Parfait pour notre PME. On a comparé nos 3 lignes d'affaires et réduit la facture de 280 $ par an. Processus simple, sans stress."
+          </p>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:#FEF3C7;color:#92400E;">JB</div>
+            <div><div class="testi-name">Jean-François B.</div><div class="testi-loc">Laval, QC</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section class="cta-band">
+    <h2 data-fr="Prêt à économiser sur<br>votre forfait télécom ?" data-en="Ready to save on<br>your telecom plan?">Prêt à économiser sur<br>votre forfait télécom ?</h2>
+    <p data-fr="Rejoignez des milliers de Québécois qui ont déjà réduit leur facture télécom. C'est gratuit, rapide et sans obligation." data-en="Join thousands of Quebecers who have already reduced their telecom bill. It's free, fast, and no obligation.">Rejoignez des milliers de Québécois qui ont déjà réduit leur facture télécom. C'est gratuit, rapide et sans obligation.</p>
+    <a href="#form" class="btn btn-primary" data-fr="Comparer mes forfaits maintenant" data-en="Compare My Plans Now">Comparer mes forfaits maintenant</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo">Forfait<span>Canada</span></a>
+        <p data-fr="Plateforme indépendante de comparaison de forfaits télécom au Québec. Service 100% gratuit et sans engagement." data-en="Independent telecom plan comparison platform in Quebec. 100% free and no-commitment service.">Plateforme indépendante de comparaison de forfaits télécom au Québec. Service 100% gratuit et sans engagement.</p>
+      </div>
+      <div class="footer-col">
+        <h6 data-fr="Services" data-en="Services">Services</h6>
+        <ul>
+          <li><a href="#" data-fr="Internet" data-en="Internet">Internet</a></li>
+          <li><a href="#" data-fr="Cellulaire" data-en="Mobile">Cellulaire</a></li>
+          <li><a href="#" data-fr="Télévision" data-en="Television">Télévision</a></li>
+          <li><a href="#" data-fr="Téléphonie" data-en="Home Phone">Téléphonie</a></li>
+          <li><a href="#" data-fr="Entreprises" data-en="Business">Entreprises</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h6 data-fr="Compagnie" data-en="Company">Compagnie</h6>
+        <ul>
+          <li><a href="#" data-fr="À propos" data-en="About">À propos</a></li>
+          <li><a href="#" data-fr="Comment ça marche" data-en="How it works">Comment ça marche</a></li>
+          <li><a href="#" data-fr="Devenir partenaire" data-en="Become a partner">Devenir partenaire</a></li>
+          <li><a href="#" data-fr="Blogue" data-en="Blog">Blogue</a></li>
+          <li><a href="#" data-fr="Contact" data-en="Contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h6 data-fr="Légal" data-en="Legal">Légal</h6>
+        <ul>
+          <li><a href="#" data-fr="Termes et conditions" data-en="Terms & Conditions">Termes et conditions</a></li>
+          <li><a href="#" data-fr="Politique de confidentialité" data-en="Privacy Policy">Politique de confidentialité</a></li>
+          <li><a href="#" data-fr="Cookies" data-en="Cookies">Cookies</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 ForfaitCanada. <span data-fr="Tous droits réservés." data-en="All rights reserved.">Tous droits réservés.</span></p>
+      <p data-fr="🇨🇦 Fait au Québec, pour le Québec." data-en="🇨🇦 Made in Quebec, for Quebec.">🇨🇦 Fait au Québec, pour le Québec.</p>
+    </div>
+  </footer>
+
+  <!-- STICKY MOBILE CTA -->
+  <div class="sticky-cta">
+    <a href="#form" class="btn btn-primary" data-fr="Comparer gratuitement →" data-en="Compare for free →">Comparer gratuitement →</a>
+  </div>
+
+  <script>
+    // ── LANGUAGE TOGGLE ──
+    let lang = 'fr';
+    function toggleLang() {
+      lang = lang === 'fr' ? 'en' : 'fr';
+      document.getElementById('langBtn').textContent = lang === 'fr' ? 'EN' : 'FR';
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-fr]').forEach(el => {
+        const val = el.getAttribute('data-' + lang);
+        if (!val) return;
+        if (el.tagName === 'INPUT' || el.tagName === 'OPTION') {
+          el.placeholder = val;
+        } else {
+          el.innerHTML = val;
+        }
+      });
+    }
+
+    // ── SERVICE TABS ──
+    function setTab(el) {
+      document.querySelectorAll('.service-tab').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+    }
+
+    // ── FORM SUBMIT ──
+    function submitForm(e) {
+      e.preventDefault();
+      const form = document.getElementById('leadForm');
+      const success = document.getElementById('successMsg');
+      form.style.display = 'none';
+      success.style.display = 'block';
+      // Re-apply lang to success message
+      success.querySelectorAll('[data-fr]').forEach(el => {
+        const val = el.getAttribute('data-' + lang);
+        if (val) el.innerHTML = val;
+      });
+    }
+
+    // ── SCROLL REVEAL ──
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ── SMOOTH NAV LINKS ──
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      });
+    });
+  </script>
+</body>
+</html>
