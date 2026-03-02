@@ -826,7 +826,7 @@
     document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
     /* ── Smooth scroll ── */
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
+    document.querySelectorAll('a[href^="index.html"]').forEach(a => {
       a.addEventListener('click', e => {
         const id = a.getAttribute('href');
         if (id === '#') return;
